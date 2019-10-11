@@ -1,0 +1,17 @@
+[package]
+name = "l298n"
+version = "0.1.0"
+description = "A rust driver for the L298N (Dual H-Bridge Motor Controller module)"
+authors = ["Luca Zulian <lucagiuggia@gmail.com>"]
+categories = ["embedded", "hardware-support", "no-std"]
+keywords = ["hal", "IO"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/lucazulian/l298n"
+edition = "2018"
+exclude = [
+    ".travis.yml",
+]
+
+[dependencies]
+embedded-hal = "0.2.3"
