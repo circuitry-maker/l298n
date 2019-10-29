@@ -3,44 +3,69 @@
 #![allow(dead_code)]
 #![no_std]
 
-//! Constructs a new
-//!
-//! 
+//! Manages a new L298N a Dual H-Bridge Motor Controller module
 
 use embedded_hal::digital::v2::OutputPin;
 use embedded_hal::PwmPin;
 
-/// dummy
-pub struct Motor<IN1, IN2, PWM>
+/// Struct for L298N. Two enable inputs are provided to enable or disable the device
+/// independently of the input signals. The emitters of the lower transistors of each
+/// bridge are connected together and the corresponding external terminal can be used
+/// for the connection of an external sensing resistor. An additional supply input is
+/// provided so that the logic works at a lower voltage.
+pub struct L298N<IN, PWM>
 where
-    IN1: OutputPin,
-    IN2: OutputPin,
+    IN: OutputPin,
     PWM: PwmPin,
 {
-    in1: IN1,
-    in2: IN2,
+    a: Motor<IN, PWM>,
+    b: Motor<IN, PWM>,
+}
+
+impl<IN, PWM> L298N<IN, PWM>
+where
+    IN: OutputPin,
+    PWM: PwmPin,
+{
+    /// Creates a new `L298N` motor controller
+    pub fn new(ina1: IN, ina2: IN, pwma:PWM, inb1: IN, inb2: IN, pwmb:PWM) -> L298N<IN, PWM>
+    where
+        IN: OutputPin,
+        PWM: PwmPin,
+        {
+            L298N {
+                a: Motor::new(ina1, ina2, pwma),
+                b: Motor::new(inb1, inb2, pwmb)
+            }
+    }
+}
+
+/// Struct for single bridge.
+pub struct Motor<IN, PWM>
+where
+    IN: OutputPin,
+    PWM: PwmPin,
+{
+    in1: IN,
+    in2: IN,
     pwm: PWM,
 }
 
-
-impl<IN1, IN2, PWM> Motor<IN1, IN2, PWM>
+impl<IN, PWM> Motor<IN, PWM>
 where
-    IN1: OutputPin,
-    IN2: OutputPin,
+    IN: OutputPin,
     PWM: PwmPin,
 {
-    /// dummy
-    pub fn new(in1: IN1, in2: IN2, pwm:PWM) -> Motor<IN1, IN2, PWM>
+    /// Creates a new single `Motor` controller
+    pub fn new(in1: IN, in2: IN, pwm:PWM) -> Motor<IN, PWM>
     where
-        IN1: OutputPin,
-        IN2: OutputPin,
+        IN: OutputPin,
         PWM: PwmPin,
         {
-
             Motor {
-                in1: in1,
-                in2: in2,
-                pwm: pwm
+                in1,
+                in2,
+                pwm
             }
     }
 

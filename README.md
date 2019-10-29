@@ -12,18 +12,31 @@ Include this [library](https://crates.io/crates/l298n) as a dependency in your `
 [dependencies.l298n]
 version = "<version>"
 ```
-Use [embedded-hal](https://github.com/rust-embedded/embedded-hal) implementation to get PINA, PINB and PWM and then create l298n single motor:
+Use [embedded-hal](https://github.com/rust-embedded/embedded-hal) implementation to get PINA, PINB and PWM and then create a single motor:
 
 ```rust
 extern crate l298n;
 
 let motor = l298n::Motor::new(PINA, PINB, PWM);
 
-motoa.set_duty(12); 
+motor.set_duty(12);
 
 motor.brake();
 
 ```
+or a l298 dual bridge motor:
+```rust
+extern crate l298n;
+
+let motor = l298n::L298N::new(PIN1A, PIN2A, PWM1B, IN2B, PIN1B, PWMB);
+
+motor.a.set_duty(12);
+
+motor.a.brake();
+
+```
+
+
 
 ## Documentation
 
