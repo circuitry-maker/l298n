@@ -1,9 +1,20 @@
-#![deny(missing_docs)]
-#![deny(warnings)]
-#![allow(dead_code)]
 #![no_std]
 
 //! Manages a new L298N a Dual H-Bridge Motor Controller module
+
+#![deny(
+    missing_docs,
+    missing_debug_implementations,
+    missing_copy_implementations,
+    trivial_casts,
+    trivial_numeric_casts,
+    unstable_features,
+    unused_import_braces,
+    unused_qualifications,
+    warnings
+)]
+#![allow(dead_code)]
+
 
 use embedded_hal::digital::v2::OutputPin;
 use embedded_hal::PwmPin;
@@ -13,6 +24,7 @@ use embedded_hal::PwmPin;
 /// bridge are connected together and the corresponding external terminal can be used
 /// for the connection of an external sensing resistor. An additional supply input is
 /// provided so that the logic works at a lower voltage.
+#[derive(Debug)]
 pub struct L298N<IN, PWM>
 where
     IN: OutputPin,
@@ -40,7 +52,8 @@ where
     }
 }
 
-/// Struct for single bridge.
+/// Struct for single bridge
+#[derive(Debug)]
 pub struct Motor<IN, PWM>
 where
     IN: OutputPin,

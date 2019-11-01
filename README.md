@@ -3,6 +3,7 @@
 > no_std driver for [L298N](https://www.st.com/resource/en/datasheet/l298.pdf) (Dual H-Bridge Motor Controller module)
 
 [![Build Status](https://travis-ci.org/lucazulian/l298n.svg?branch=master)](https://travis-ci.org/lucazulian/l298n)
+[![crates.io](http://meritbadge.herokuapp.com/l298n?style=flat-square)](https://crates.io/crates/l298n)
 
 ## Basic usage
 
