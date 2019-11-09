@@ -25,25 +25,39 @@ use embedded_hal::PwmPin;
 /// for the connection of an external sensing resistor. An additional supply input is
 /// provided so that the logic works at a lower voltage.
 #[derive(Debug)]
-pub struct L298N<IN, PWM>
+pub struct L298N<INA, INB, INC, IND, PWMA, PWMB>
 where
-    IN: OutputPin,
-    PWM: PwmPin,
+    INA: OutputPin,
+    INB: OutputPin,
+    INC: OutputPin,
+    IND: OutputPin,
+    PWMA: PwmPin,
+    PWMB: PwmPin,
 {
-    a: Motor<IN, PWM>,
-    b: Motor<IN, PWM>,
+    /// motor A
+    pub a: Motor<INA, INB, PWMA>,
+    /// motor B
+    pub b: Motor<INC, IND, PWMB>,
 }
 
-impl<IN, PWM> L298N<IN, PWM>
+impl<INA, INB, INC, IND, PWMA, PWMB> L298N<INA, INB, INC, IND, PWMA, PWMB>
 where
-    IN: OutputPin,
-    PWM: PwmPin,
+    INA: OutputPin,
+    INB: OutputPin,
+    INC: OutputPin,
+    IND: OutputPin,
+    PWMA: PwmPin,
+    PWMB: PwmPin,
 {
     /// Creates a new `L298N` motor controller
-    pub fn new(ina1: IN, ina2: IN, pwma:PWM, inb1: IN, inb2: IN, pwmb:PWM) -> L298N<IN, PWM>
+    pub fn new(ina1: INA, ina2: INB, pwma:PWMA, inb1: INC, inb2: IND, pwmb:PWMB) -> L298N<INA, INB, INC, IND, PWMA, PWMB>
     where
-        IN: OutputPin,
-        PWM: PwmPin,
+        INA: OutputPin,
+        INB: OutputPin,
+        INC: OutputPin,
+        IND: OutputPin,
+        PWMA: PwmPin,
+        PWMB: PwmPin,
         {
             L298N {
                 a: Motor::new(ina1, ina2, pwma),
@@ -54,25 +68,28 @@ where
 
 /// Struct for single bridge
 #[derive(Debug)]
-pub struct Motor<IN, PWM>
+pub struct Motor<INF, INS, PWM>
 where
-    IN: OutputPin,
+    INF: OutputPin,
+    INS: OutputPin,
     PWM: PwmPin,
 {
-    in1: IN,
-    in2: IN,
+    in1: INF,
+    in2: INS,
     pwm: PWM,
 }
 
-impl<IN, PWM> Motor<IN, PWM>
+impl<INF, INS, PWM> Motor<INF, INS, PWM>
 where
-    IN: OutputPin,
+    INF: OutputPin,
+    INS: OutputPin,
     PWM: PwmPin,
 {
     /// Creates a new single `Motor` controller
-    pub fn new(in1: IN, in2: IN, pwm:PWM) -> Motor<IN, PWM>
+    pub fn new(in1: INF, in2: INS, pwm:PWM) -> Motor<INF, INS, PWM>
     where
-        IN: OutputPin,
+        INF: OutputPin,
+        INS: OutputPin,
         PWM: PwmPin,
         {
             Motor {
