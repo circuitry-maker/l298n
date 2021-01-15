@@ -92,6 +92,9 @@ where
         INS: OutputPin,
         PWM: PwmPin,
         {
+            let mut pwm = pwm;
+            pwm.enable();
+            
             Motor {
                 in1,
                 in2,
@@ -118,7 +121,6 @@ where
     /// Makes the motor forward direction
     /// with Ven = H then C = H ; D = L Forward
     pub fn forward(&mut self) -> &mut Self {
-        self.pwm.enable();
         self.in1.set_low().ok();
         self.in2.set_high().ok();
         self
@@ -127,7 +129,6 @@ where
     /// Makes the motor reverse direction
     /// with Ven = H then C = L ; D = H Reverse
     pub fn reverse(&mut self) -> &mut Self {
-        self.pwm.enable();
         self.in1.set_high().ok();
         self.in2.set_low().ok();
         self
