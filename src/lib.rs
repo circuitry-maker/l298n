@@ -92,6 +92,9 @@ where
         INS: OutputPin,
         PWM: PwmPin,
         {
+            let mut pwm = pwm;
+            pwm.enable();
+            
             Motor {
                 in1,
                 in2,
