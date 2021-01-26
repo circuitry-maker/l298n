@@ -15,7 +15,6 @@
 )]
 #![allow(dead_code)]
 
-
 use embedded_hal::digital::v2::OutputPin;
 use embedded_hal::PwmPin;
 
@@ -50,7 +49,14 @@ where
     PWMB: PwmPin,
 {
     /// Creates a new `L298N` motor controller
-    pub fn new(ina1: INA, ina2: INB, pwma:PWMA, inb1: INC, inb2: IND, pwmb:PWMB) -> L298N<INA, INB, INC, IND, PWMA, PWMB>
+    pub fn new(
+        ina1: INA,
+        ina2: INB,
+        pwma: PWMA,
+        inb1: INC,
+        inb2: IND,
+        pwmb: PWMB,
+    ) -> L298N<INA, INB, INC, IND, PWMA, PWMB>
     where
         INA: OutputPin,
         INB: OutputPin,
@@ -58,11 +64,11 @@ where
         IND: OutputPin,
         PWMA: PwmPin,
         PWMB: PwmPin,
-        {
-            L298N {
-                a: Motor::new(ina1, ina2, pwma),
-                b: Motor::new(inb1, inb2, pwmb)
-            }
+    {
+        L298N {
+            a: Motor::new(ina1, ina2, pwma),
+            b: Motor::new(inb1, inb2, pwmb),
+        }
     }
 }
 
@@ -86,20 +92,16 @@ where
     PWM: PwmPin,
 {
     /// Creates a new single `Motor` controller
-    pub fn new(in1: INF, in2: INS, pwm:PWM) -> Motor<INF, INS, PWM>
+    pub fn new(in1: INF, in2: INS, pwm: PWM) -> Motor<INF, INS, PWM>
     where
         INF: OutputPin,
         INS: OutputPin,
         PWM: PwmPin,
-        {
-            let mut pwm = pwm;
-            pwm.enable();
-            
-            Motor {
-                in1,
-                in2,
-                pwm
-            }
+    {
+        let mut pwm = pwm;
+        pwm.enable();
+
+        Motor { in1, in2, pwm }
     }
 
     /// Brakes the motor - Fast Motor Stop
