@@ -135,7 +135,7 @@ where
     }
 
     /// Returns the maximum
-    pub fn get_max_duty(&mut self) -> PWM::Duty {
+    pub fn get_max_duty(&self) -> PWM::Duty {
         self.pwm.get_max_duty()
     }
 
@@ -146,7 +146,7 @@ where
     }
 
     /// Get the actual motor speed
-    pub fn get_current_duty(&mut self) -> PWM::Duty {
+    pub fn get_current_duty(&self) -> PWM::Duty {
         self.pwm.get_duty()
     }
 }
