@@ -2,8 +2,11 @@
 
 > no_std driver for [L298N](https://www.st.com/resource/en/datasheet/l298.pdf) (Dual H-Bridge Motor Controller module)
 
-[![Build Status](https://travis-ci.org/lucazulian/l298n.svg?branch=master)](https://travis-ci.org/lucazulian/l298n)
+[![Build Status](https://github.com/lucazulian/l298n/workflows/l298n-ci/badge.svg)](https://github.com/lucazulian/l298n/actions?query=workflow%3Al298n-ci)
 [![crates.io](http://meritbadge.herokuapp.com/l298n?style=flat-square)](https://crates.io/crates/l298n)
+[![Docs](https://docs.rs/l298n/badge.svg)](https://docs.rs/l298n)
+[![Coverage Status](https://coveralls.io/repos/github/lucazulian/l298n/badge.svg?branch=master)](https://coveralls.io/github/lucazulian/l298n?branch=master)
+
 
 ## Basic usage
 
@@ -36,12 +39,6 @@ motor.a.set_duty(12);
 motor.a.brake();
 
 ```
-
-
-
-## Documentation
-
-API Docs available on [docs.rs](https://docs.rs/l298n/0.1.0/l298n/)
 
 ## License
 
