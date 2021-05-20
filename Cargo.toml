@@ -1,6 +1,6 @@
 [package]
 name = "l298n"
-version = "0.1.3"
+version = "0.2.0"
 description = "A rust driver for the L298N (Dual H-Bridge Motor Controller module)"
 authors = ["Luca Zulian <lucagiuggia@gmail.com>"]
 categories = ["embedded", "hardware-support", "no-std"]
