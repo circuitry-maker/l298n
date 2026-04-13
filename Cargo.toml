@@ -12,4 +12,4 @@ edition = "2018"
 exclude = []
 
 [dependencies]
-embedded-hal = "0.2.3"
+embedded-hal = "1.0.0"
